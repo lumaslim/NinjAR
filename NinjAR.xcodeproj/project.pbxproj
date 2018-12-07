@@ -53,6 +53,7 @@
 		55236B9321B800B2009DA9E0 /* NinjARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55236B9721B800B2009DA9E0 /* NinjARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinjARUITests.swift; sourceTree = "<group>"; };
 		55236B9921B800B2009DA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 		55236B7021B800B0009DA9E0 /* NinjAR */ = {
 			isa = PBXGroup;
 			children = (
+				559CB69F21BA0CC50081B3F4 /* Sounds */,
 				55236B8321B800B2009DA9E0 /* Info.plist */,
 				55236B7521B800B1009DA9E0 /* Actions.sks */,
 				55236B7321B800B0009DA9E0 /* GameScene.sks */,
@@ -156,6 +158,14 @@
 			children = (
 			);
 			path = "Supporting-Project-Files";
+			sourceTree = "<group>";
+		};
+		559CB69F21BA0CC50081B3F4 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
