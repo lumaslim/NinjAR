@@ -110,10 +110,11 @@ extension GameScene {
         monster.run(moveAction, withKey: "randomMove")
     }
     func getMonsterMoveAction() -> SKAction {
+        print("movin", size)
         // Strange behaviour depending on portrait landscape. landscape seems to work as expected.
         // Monster movement
         let moveDurationRandom = TimeInterval(random(min: 1.0, max: 6.5)) // feels redundant
-        let moveDestination = CGPoint(x: 768, y: 1024) // 768,1024 ends up near the tap point of 470,0 ... Strange
+        let moveDestination = CGPoint(x: size.width / 2, y: size.height / 2) // 768,1024 ends up near the tap point of 470,0 ... Strange
         let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
         
         return moveAction
