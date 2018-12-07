@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+
+
 class GameViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -25,12 +27,8 @@ class GameViewController: UIViewController {
         // Present the scene
         view.presentScene(scene)
         
-        
-        // Performance optimisation.
-        view.ignoresSiblingOrder = true
-        // Debug
-        view.showsFPS = true
-        view.showsNodeCount = true
+        setPerformanceOptimisation(on: view)
+        setShowDebug(on: view, enable: true)
         print("GameViewController:: viewDidLoad() finished")
     }
     
@@ -50,4 +48,37 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
 }
+
+// Trade-off
+protocol PerfOptimisable {
+    
+}
+protocol DebugShowable {
+    func setPerformanceOptimisation(on view: SKView)
+    
+    func setShowDebug(on view: SKView, enable toggle: Bool)
+}
+// 4 mainstream uses for protocol-oriented programming Swift extensions
+// private access control. logic segregation / pragma replacement.
+// Old article https://www.natashatherobot.com/using-swift-extensions/
+// Newer https://cocoacasts.com/four-clever-uses-of-swift-extensions
+// Popular Swifty paradigms: Functional Programming, Reactive, Struct Protocol Extension
+//
+// extend SKView vs just logic on viewcontrollers?
+private extension GameViewController: DebugShowable {
+    func setPerformanceOptimisation(on view: SKView) {
+        // Performance optimisation avoid calculating superfluous order.
+        view.ignoresSiblingOrder = true
+    }
+    func setShowDebug(on view: SKView, enable toggle: Bool) {
+        // Debug stats
+        view.showsFPS = toggle
+        view.showsNodeCount = toggle
+        view.showsFields = toggle
+        view.showsDrawCount = toggle
+        view.showsQuadCount = toggle
+    }
+}
+
