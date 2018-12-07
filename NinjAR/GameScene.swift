@@ -14,7 +14,6 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     
     
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
