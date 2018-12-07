@@ -64,7 +64,14 @@ class GameScene: SKScene {
         
         
     }
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("GameScene:: touchesEnded begin")
+        guard let firstTouch = touches.first else { return }
+        let touchLocationInScene = firstTouch.location(in: self)
+        
+        shootProjectile(at: touchLocationInScene)
+        print("GameScene:: touchesEnded end")
+    }
 }
 
 extension GameScene {
@@ -79,7 +86,7 @@ extension CGPoint {
         self.init(x: convenientX, y: convenientY)
     }
 }
-// - MARK: Monster
+// - MARK: Monstera
 extension GameScene {
     // lol
     func spawn(monster: SKSpriteNode, onParent gameScene: GameScene) {
@@ -122,3 +129,32 @@ extension GameScene {
         return moveAction
     }
 }
+// Generalise the commonalities between monster player and projectiles. Mob and projectiles?
+// - MARK: Projectiles
+extension GameScene {
+    func shootProjectile(at proposedTarget: CGPoint) {
+        let projectile = SKSpriteNode(imageNamed: "projectile")
+        projectile.position = player.position
+        let directionalOffset = proposedTarget - projectile.position
+        
+        // Set up vectors for directional shooting and movement action.
+        let direction = directionalOffset.normalized()
+        let shootDistance: CGPoint = direction * size.width // arbitrary distance to go the distance... and hit the target
+        let destination: CGPoint = shootDistance + projectile.position
+        
+        // Attach the projectile to view the spawning shoot effect)
+        addChild(projectile)
+        
+        // Shoot motion
+        let projectileArbitrarySpeedRatioSecs = TimeInterval(2.0)
+        let projectileMoveAction = SKAction.move(to: destination, duration: projectileArbitrarySpeedRatioSecs)
+        let projectileDone = SKAction.removeFromParent()
+        let projectileShootActionsDoneChain = SKAction.sequence([projectileMoveAction, projectileDone])
+
+        projectile.run(projectileShootActionsDoneChain, withKey: "ShootDone")
+    }
+//    func projectileMoveActionsDoneChain() -> SKAction {
+//
+//    }
+}
+
