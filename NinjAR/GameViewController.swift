@@ -67,7 +67,7 @@ protocol DebugShowable {
 // Popular Swifty paradigms: Functional Programming, Reactive, Struct Protocol Extension
 //
 // extend SKView vs just logic on viewcontrollers?
-private extension GameViewController: DebugShowable {
+extension GameViewController: DebugShowable {
     func setPerformanceOptimisation(on view: SKView) {
         // Performance optimisation avoid calculating superfluous order.
         view.ignoresSiblingOrder = true
