@@ -28,16 +28,7 @@ class GameScene: SKScene {
         
         //
         addChild(player)
-        let s = CGSize(width: 500, height: 999)
-        for _ in 1..<5 {
-            print("makeMonster where is it")
-            
-            let mon = makeMonster()
-            
-            mon.scale(to: s)
-            print(mon)
-            addChild(mon)
-        }
+    
         
         print("Setup finished")
     }
