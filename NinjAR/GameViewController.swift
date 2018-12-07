@@ -26,7 +26,6 @@ class GameViewController: UIViewController {
         print("GameVC scene scene.size", scene.size)
         scene.scaleMode = .aspectFill
         
-        view.backgroundColor = UIColor.red
         // Present the scene
         view.presentScene(scene)
         
