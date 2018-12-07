@@ -60,6 +60,7 @@
 		559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+VectorCalculatable.swift"; sourceTree = "<group>"; };
 		559CB6A721BAA9650081B3F4 /* VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorCalculatable.swift; sourceTree = "<group>"; };
+		55A07C8021BABCA800BDE843 /* NinjAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NinjAR.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +96,7 @@
 				55236B8B21B800B2009DA9E0 /* NinjARTests */,
 				55236B9621B800B2009DA9E0 /* NinjARUITests */,
 				55236B6F21B800B0009DA9E0 /* Products */,
+				55A07C8121BABCAA00BDE843 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +113,7 @@
 		55236B7021B800B0009DA9E0 /* NinjAR */ = {
 			isa = PBXGroup;
 			children = (
+				55A07C8021BABCA800BDE843 /* NinjAR.entitlements */,
 				559CB6A621BAA9540081B3F4 /* Protocols */,
 				559CB6A321BAA4FB0081B3F4 /* Extensions */,
 				55236B7E21B800B2009DA9E0 /* Assets.xcassets */,
@@ -193,6 +196,13 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		55A07C8121BABCAA00BDE843 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,6 +271,17 @@
 				TargetAttributes = {
 					55236B6D21B800B0009DA9E0 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					55236B8721B800B2009DA9E0 = {
 						CreatedOnToolsVersion = 10.1;
@@ -514,7 +535,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = NinjAR;
+				PRODUCT_BUNDLE_IDENTIFIER = slimelime.NinjAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -534,7 +555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = NinjAR;
+				PRODUCT_BUNDLE_IDENTIFIER = slimelime.NinjAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
