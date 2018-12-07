@@ -16,7 +16,10 @@ class GameScene: SKScene {
     let player: SKSpriteNode = SKSpriteNode(imageNamed: "player")
 
     override func didMove(to view: SKView) {
-
+        // Anchor coordinates for relative placement
+        print(anchorPoint)
+        anchorPoint = CGPoint(x: 0, y: 0)
+        print(anchorPoint)
         // Setup scene
         backgroundColor = SKColor.white
         player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
