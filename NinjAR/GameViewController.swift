@@ -31,6 +31,7 @@ class GameViewController: UIViewController {
         // Debug
         view.showsFPS = true
         view.showsNodeCount = true
+        print("GameViewController:: viewDidLoad() finished")
     }
     
     

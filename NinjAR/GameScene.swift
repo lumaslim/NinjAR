@@ -13,8 +13,56 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     
+    let player: SKSpriteNode = SKSpriteNode(imageNamed: "player")
+
+    override func didMove(to view: SKView) {
+
+        // Setup scene
+        backgroundColor = SKColor.white
+        player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
+        
+        //
+        addChild(player)
+        
+        for _ in 1..<5 {
+            print("makeMonster where is it")
+            makeMonster()
+        }
+        
+        print("Setup finished")
+    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+    
+    func addMob() {
+    
+    }
+    func makeMonster() {
+        let monster = SKSpriteNode(imageNamed: "monster")
+      
+        // Monster spawn
+        // Does position use top-left as for relation to origin coordinates?
+        let spawnYRandom = random(min: monster.size.height, max: size.height)
+        let spawnXRightWall = size.width - monster.size.width
+        
+        monster.position = CGPoint(x: spawnXRightWall, y: spawnYRandom)
+        
+        addChild(monster)
+        
+        // Monster movement
+        let moveDurationRandom = TimeInterval(random(min: 1.0, max: 4.0)) // feels redundant
+        let moveDestination = CGPoint(x: 20, y: 20)
+        let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
+        
+        monster.run(moveAction)
+        print("Monster run")
+    }
+    
+    // Swift 4 random unification API
+    func random(min: CGFloat, max: CGFloat) -> CGFloat {
+        return CGFloat.random(in: min..<max)
+    }
+
 }
