@@ -56,14 +56,16 @@ class GameScene: SKScene {
         
         // Monster movement
         let moveDurationRandom = TimeInterval(random(min: 1.0, max: 4.0)) // feels redundant
-        let moveDestination = CGPoint(x: 1, y: 1)
+        let moveDestination = CGPoint(x: 100, y: 444)
         let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
         
         monster.run(moveAction, withKey: "randomMove")
  
         print("Monster run")
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        makeMonster()
+    }
     // Swift 4 random unification API
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
         return CGFloat.random(in: min..<max)
