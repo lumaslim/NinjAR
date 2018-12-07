@@ -56,10 +56,11 @@ class GameScene: SKScene {
         
         // Monster movement
         let moveDurationRandom = TimeInterval(random(min: 1.0, max: 4.0)) // feels redundant
-        let moveDestination = CGPoint(x: 20, y: 20)
+        let moveDestination = CGPoint(x: 1, y: 1)
         let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
         
-        monster.run(moveAction)
+        monster.run(moveAction, withKey: "randomMove")
+ 
         print("Monster run")
     }
     
