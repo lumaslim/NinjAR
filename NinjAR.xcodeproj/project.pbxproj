@@ -104,15 +104,15 @@
 		55236B7021B800B0009DA9E0 /* NinjAR */ = {
 			isa = PBXGroup;
 			children = (
+				55236B7E21B800B2009DA9E0 /* Assets.xcassets */,
+				559CB69C21B9FD720081B3F4 /* Storyboards */,
+				559CB69D21B9FD840081B3F4 /* Delegates */,
 				559CB69F21BA0CC50081B3F4 /* Sounds */,
-				55236B8321B800B2009DA9E0 /* Info.plist */,
 				55236B7521B800B1009DA9E0 /* Actions.sks */,
 				55236B7321B800B0009DA9E0 /* GameScene.sks */,
 				55236B7721B800B1009DA9E0 /* GameScene.swift */,
 				55236B7921B800B1009DA9E0 /* GameViewController.swift */,
-				55236B7E21B800B2009DA9E0 /* Assets.xcassets */,
-				559CB69D21B9FD840081B3F4 /* Delegates */,
-				559CB69C21B9FD720081B3F4 /* Storyboards */,
+				55236B8321B800B2009DA9E0 /* Info.plist */,
 				559CB69E21B9FDBC0081B3F4 /* Supporting-Project-Files */,
 			);
 			path = NinjAR;

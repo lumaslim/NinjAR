@@ -20,10 +20,11 @@ class GameViewController: UIViewController {
         // Load ref to storyboard view... (Lame! just do full programmatic!)
         guard let view = self.view as! SKView? else { return }
         // Load the SKScene from 'GameScene.sks'
-        guard let scene = SKScene(fileNamed: "GameScene") else { return }
+        guard let scene = GameScene(fileNamed: "GameScene") else { return }
         // Set the scale mode to scale to fit the window
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         
+        view.backgroundColor = UIColor.red
         // Present the scene
         view.presentScene(scene)
         

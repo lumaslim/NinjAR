@@ -14,11 +14,13 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     
     let player: SKSpriteNode = SKSpriteNode(imageNamed: "player")
-
+    
     override func didMove(to view: SKView) {
+        print("GameScene size", size)
+        
         // Anchor coordinates for relative placement
         print(anchorPoint)
-        anchorPoint = CGPoint(x: 0, y: 0)
+//        anchorPoint = CGPoint(x: 0, y: 0)
         print(anchorPoint)
         // Setup scene
         backgroundColor = SKColor.white
@@ -26,10 +28,15 @@ class GameScene: SKScene {
         
         //
         addChild(player)
-        
+        let s = CGSize(width: 500, height: 999)
         for _ in 1..<5 {
             print("makeMonster where is it")
-            makeMonster()
+            
+            let mon = makeMonster()
+            
+            mon.scale(to: s)
+            print(mon)
+            addChild(mon)
         }
         
         print("Setup finished")
@@ -39,36 +46,76 @@ class GameScene: SKScene {
         // Called before each frame is rendered
     }
     
-    func addMob() {
     
-    }
-    func makeMonster() {
-        let monster = SKSpriteNode(imageNamed: "monster")
-      
-        // Monster spawn
-        // Does position use top-left as for relation to origin coordinates?
-        let spawnYRandom = random(min: monster.size.height, max: size.height)
-        let spawnXRightWall = size.width - monster.size.width
-        
-        monster.position = CGPoint(x: spawnXRightWall, y: spawnYRandom)
-        
-        addChild(monster)
-        
-        // Monster movement
-        let moveDurationRandom = TimeInterval(random(min: 1.0, max: 4.0)) // feels redundant
-        let moveDestination = CGPoint(x: 100, y: 444)
-        let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
-        
-        monster.run(moveAction, withKey: "randomMove")
- 
-        print("Monster run")
-    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        makeMonster()
+        print("touchesBegan:: start ", touches)
+        let pts = [
+            CGPoint(0, 0),
+            CGPoint(0, size.height),
+            CGPoint(size.width, 0), // 1000,0 scaled to 700,24.5 ? with aspectfill and gamescene on ipadpro12.9 res
+            CGPoint(size.width, size.height)
+        ]
+        let monsters = [makeMonster(), makeMonster(), makeMonster(), makeMonster()]
+
+        
+        let szWidth = size.width
+        let szHeight = size.height
+        //        let spawnXRightWall = size.width - monster.size.width
+        //        let spawnYRandom = random(min: monster.size.height, max: size.height)
+        for (index, eaMonster) in monsters.enumerated() {
+            addChild(eaMonster)
+            positionMobNodeInParent(eaMonster, at: pts[index])
+            let moveIt = getMonsterMoveAction()
+            setMonsterMove(monster: eaMonster, move: moveIt)
+        }
+        
+        print("touchesBegan:: end")
+        
+        
     }
+    
+}
+
+extension GameScene {
     // Swift 4 random unification API
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
         return CGFloat.random(in: min..<max)
     }
-
+    
+}
+extension CGPoint {
+    init(_ convenientX: CGFloat, _ convenientY: CGFloat) {
+        self.init(x: convenientX, y: convenientY)
+    }
+}
+// - MARK: Monster
+extension GameScene {
+    // lol
+    func spawn(monster: SKSpriteNode, onParent gameScene: GameScene) {
+        gameScene.addChild(monster)
+    }
+    func makeMonster() -> SKSpriteNode {
+        return SKSpriteNode(imageNamed: "monster")
+    }
+    
+    // welp superfluous
+    func positionMobNodeInParent(_ monster: SKSpriteNode, at point: CGPoint) {
+        // Does position use top-left origin for relative coordinates?
+        //        let spawnXRightWall = size.width - monster.size.width
+        //        let spawnYRandom = random(min: monster.size.height, max: size.height)
+        
+        monster.position = point
+    }
+    func setMonsterMove(monster: SKSpriteNode, move moveAction: SKAction) {
+        monster.run(moveAction, withKey: "randomMove")
+    }
+    func getMonsterMoveAction() -> SKAction {
+        // Strange behaviour depending on portrait landscape. landscape seems to work as expected.
+        // Monster movement
+        let moveDurationRandom = TimeInterval(random(min: 1.0, max: 6.5)) // feels redundant
+        let moveDestination = CGPoint(x: 768, y: 1024) // 768,1024 ends up near the tap point of 470,0 ... Strange
+        let moveAction = SKAction.move(to: moveDestination, duration: moveDurationRandom)
+        
+        return moveAction
+    }
 }
