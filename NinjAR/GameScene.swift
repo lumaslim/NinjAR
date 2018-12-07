@@ -20,8 +20,7 @@ class GameScene: SKScene {
         
         // Anchor coordinates for relative placement
         print(anchorPoint)
-//        anchorPoint = CGPoint(x: 0, y: 0)
-        print(anchorPoint)
+
         // Setup scene
         backgroundColor = SKColor.white
         player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
@@ -40,7 +39,7 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesBegan:: start ", touches)
-        let pts = [
+        let spawnPoints = [
             CGPoint(0, 0),
             CGPoint(0, size.height),
             CGPoint(size.width, 0), // 1000,0 scaled to 700,24.5 ? with aspectfill and gamescene on ipadpro12.9 res
@@ -53,11 +52,12 @@ class GameScene: SKScene {
         let szHeight = size.height
         //        let spawnXRightWall = size.width - monster.size.width
         //        let spawnYRandom = random(min: monster.size.height, max: size.height)
-        for (index, eaMonster) in monsters.enumerated() {
-            addChild(eaMonster)
-            positionMobNodeInParent(eaMonster, at: pts[index])
-            let moveIt = getMonsterMoveAction()
-            setMonsterMove(monster: eaMonster, move: moveIt)
+        for (index, monster) in monsters.enumerated() {
+            addChild(monster)
+            positionMobNodeInParent(monster, at: spawnPoints[index])
+            
+            monster.run(getMonsterMoveChainDespawnSequence(), withKey: "MoveDespawn")
+            
         }
         
         print("touchesBegan:: end")
@@ -99,6 +99,17 @@ extension GameScene {
     }
     func setMonsterMove(monster: SKSpriteNode, move moveAction: SKAction) {
         monster.run(moveAction, withKey: "randomMove")
+    }
+    func getMonsterMoveChainDespawnSequence() -> SKAction {
+        // Sequence of multiple actions is also an SKAction
+        return SKAction.sequence([
+            getMonsterMoveAction(),
+            getDespawnMonsterAction()
+        ])
+    }
+    func getDespawnMonsterAction() -> SKAction {
+        // Removes node from the parent. e.g. SCNNode mob that runs this action.
+        return SKAction.removeFromParent()
     }
     func getMonsterMoveAction() -> SKAction {
         print("movin", size)
