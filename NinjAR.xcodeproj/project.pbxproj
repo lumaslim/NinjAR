@@ -17,6 +17,8 @@
 		55236B8221B800B2009DA9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55236B8021B800B2009DA9E0 /* LaunchScreen.storyboard */; };
 		55236B8D21B800B2009DA9E0 /* NinjARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B8C21B800B2009DA9E0 /* NinjARTests.swift */; };
 		55236B9821B800B2009DA9E0 /* NinjARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B9721B800B2009DA9E0 /* NinjARUITests.swift */; };
+		559CB6A521BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */; };
+		559CB6A821BAA9650081B3F4 /* VectorCalculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB6A721BAA9650081B3F4 /* VectorCalculatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		55236B9721B800B2009DA9E0 /* NinjARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinjARUITests.swift; sourceTree = "<group>"; };
 		55236B9921B800B2009DA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
+		559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+VectorCalculatable.swift"; sourceTree = "<group>"; };
+		559CB6A721BAA9650081B3F4 /* VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorCalculatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 		55236B7021B800B0009DA9E0 /* NinjAR */ = {
 			isa = PBXGroup;
 			children = (
+				559CB6A621BAA9540081B3F4 /* Protocols */,
+				559CB6A321BAA4FB0081B3F4 /* Extensions */,
 				55236B7E21B800B2009DA9E0 /* Assets.xcassets */,
 				559CB69C21B9FD720081B3F4 /* Storyboards */,
 				559CB69D21B9FD840081B3F4 /* Delegates */,
@@ -166,6 +172,22 @@
 				559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		559CB6A321BAA4FB0081B3F4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		559CB6A621BAA9540081B3F4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				559CB6A721BAA9650081B3F4 /* VectorCalculatable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559CB6A521BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift in Sources */,
+				559CB6A821BAA9650081B3F4 /* VectorCalculatable.swift in Sources */,
 				55236B7821B800B1009DA9E0 /* GameScene.swift in Sources */,
 				55236B7A21B800B1009DA9E0 /* GameViewController.swift in Sources */,
 				55236B7221B800B0009DA9E0 /* AppDelegate.swift in Sources */,
