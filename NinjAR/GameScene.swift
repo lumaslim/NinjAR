@@ -217,7 +217,7 @@ extension GameScene: SKPhysicsContactDelegate {
         return projectilePhysics
     }
     
-    func projectileDidCollide(projectile: SKSpriteNode, hit monster: SKSpriteNode) {
+    func projectileDidCollide(projectile: SKNode, hit monster: SKNode) {
         print("Pew pew hit")
         projectile.removeFromParent()
         monster.removeFromParent()
@@ -225,6 +225,21 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         print("Pew pew contact", contact)
         
+        // Samples identify the physics body using the nested property bit category...
+        // Sounds like a better use case for polymorphism subclass of phys body
+        let bodyA = contact.bodyA
+        let bodyB = contact.bodyB
+        // Maybe if categorising collision for only one instead of both monster and projectile
+        // Can have more standard behaviour body A vs B?
+        
+        // Monster was smallest bit. b01 = 1
+        // Projectile b10 = 2
+        let (monsterPhysics, projectilePhysics) = bodyA.categoryBitMask < bodyB.categoryBitMask ? (bodyA, bodyB) : (bodyB, bodyA)
+        guard let monster: SKNode = monsterPhysics.node else { print("monster ded"); return; }
+        guard let projectile: SKNode = projectilePhysics.node else { print("bullet borked"); return; }
+        
+        // Extra checks. seems dangerous
+        projectileDidCollide(projectile: projectile, hit: monster)
     }
 }
 
