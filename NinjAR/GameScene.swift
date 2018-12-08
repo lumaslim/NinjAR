@@ -9,6 +9,15 @@
 import SpriteKit
 import GameplayKit
 
+struct PhysicsCategory {
+    // Interesting bit flags
+    // Doesn't Swift have nicer bitmask functionality?
+    static let none : UInt32 = 0            // 0000 0000 0000 0000
+    static let all : UInt32 = UInt32.max    // 1111 1111 1111 1111
+    static let monster: UInt32 = 0b1        // Says 1 but b1 notation ??// 0000 0000 0000 0001
+    static let projectile: UInt32 = 0b10     // 0000 0000 0000 0010
+        // 0x1, 0x2??
+}
 class GameScene: SKScene {
     
     private var label : SKLabelNode?
@@ -22,12 +31,18 @@ class GameScene: SKScene {
         print(anchorPoint)
 
         // Setup scene
+
         backgroundColor = SKColor.white
         player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
         
-        //
+        // Setup physics
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
+        
+        // Spawn player
         addChild(player)
     
+
         
         print("Setup finished")
     }
@@ -47,15 +62,18 @@ class GameScene: SKScene {
         ]
         let monsters = [makeMonster(), makeMonster(), makeMonster(), makeMonster()]
 
-        
-        let szWidth = size.width
-        let szHeight = size.height
         //        let spawnXRightWall = size.width - monster.size.width
         //        let spawnYRandom = random(min: monster.size.height, max: size.height)
         for (index, monster) in monsters.enumerated() {
+            
+            
+            // Spawn
             addChild(monster)
             positionMobNodeInParent(monster, at: spawnPoints[index])
+            // Physics and collision
+            guard let _ = setupPhysics(onMonster: monster) else { return }
             
+            // Movement
             monster.run(getMonsterMoveChainDespawnSequence(), withKey: "MoveDespawn")
             
         }
@@ -69,8 +87,12 @@ class GameScene: SKScene {
         guard let firstTouch = touches.first else { return }
         let touchLocationInScene = firstTouch.location(in: self)
         
-        shootProjectile(at: touchLocationInScene)
+        let projectile = shootProjectile(at: touchLocationInScene)
         print("GameScene:: touchesEnded end")
+        
+        // Physics and detection
+        guard let _: SKPhysicsBody = setupPhysics(onProjectile: projectile) else { return }
+        
     }
 }
 
@@ -132,7 +154,7 @@ extension GameScene {
 // Generalise the commonalities between monster player and projectiles. Mob and projectiles?
 // - MARK: Projectiles
 extension GameScene {
-    func shootProjectile(at proposedTarget: CGPoint) {
+    func shootProjectile(at proposedTarget: CGPoint) -> SKSpriteNode {
         let projectile = SKSpriteNode(imageNamed: "projectile")
         projectile.position = player.position
         let directionalOffset = proposedTarget - projectile.position
@@ -152,9 +174,57 @@ extension GameScene {
         let projectileShootActionsDoneChain = SKAction.sequence([projectileMoveAction, projectileDone])
 
         projectile.run(projectileShootActionsDoneChain, withKey: "ShootDone")
+        
+        return projectile
     }
 //    func projectileMoveActionsDoneChain() -> SKAction {
 //
 //    }
+}
+
+// - MARK: Mob Physics and collision detection
+extension GameScene: SKPhysicsContactDelegate {
+    func setupPhysics(onMonster monster: SKSpriteNode) -> SKPhysicsBody? {
+        monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size)
+        
+        guard let monsterPhysics = monster.physicsBody else { return nil }
+        monsterPhysics.isDynamic = true
+        monsterPhysics.categoryBitMask = PhysicsCategory.monster
+        // Intersection notification on AND the bit categories.
+        monsterPhysics.contactTestBitMask = PhysicsCategory.projectile
+        // Bouncy contact
+        monsterPhysics.collisionBitMask = PhysicsCategory.none
+        
+        return monsterPhysics // returns the physicsbody configured.
+    }
+    
+    func setupPhysics(onProjectile projectile: SKSpriteNode) -> SKPhysicsBody? {
+        let projectilePhysics = SKPhysicsBody(circleOfRadius: projectile.size.width)
+        
+        projectilePhysics.isDynamic = true
+        projectilePhysics.categoryBitMask = PhysicsCategory.projectile
+        projectilePhysics.contactTestBitMask = PhysicsCategory.monster
+        
+        // seems redundant to test contact with both monster->projectile and projectile->monster
+        // rip tutorial games programming where is good software design patterns complexity
+        projectilePhysics.collisionBitMask = PhysicsCategory.none
+        // Precision important for fast moving phys clipping detection issues
+        projectilePhysics.usesPreciseCollisionDetection = true
+        
+        // oops
+        projectile.physicsBody = projectilePhysics
+        
+        return projectilePhysics
+    }
+    
+    func projectileDidCollide(projectile: SKSpriteNode, hit monster: SKSpriteNode) {
+        print("Pew pew hit")
+        projectile.removeFromParent()
+        monster.removeFromParent()
+    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        print("Pew pew contact", contact)
+        
+    }
 }
 
