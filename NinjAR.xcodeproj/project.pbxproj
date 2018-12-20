@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		55236B7221B800B0009DA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B7121B800B0009DA9E0 /* AppDelegate.swift */; };
 		55236B7421B800B0009DA9E0 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 55236B7321B800B0009DA9E0 /* GameScene.sks */; };
-		55236B7621B800B1009DA9E0 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 55236B7521B800B1009DA9E0 /* Actions.sks */; };
 		55236B7821B800B1009DA9E0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B7721B800B1009DA9E0 /* GameScene.swift */; };
 		55236B7A21B800B1009DA9E0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B7921B800B1009DA9E0 /* GameViewController.swift */; };
 		55236B7D21B800B1009DA9E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55236B7B21B800B1009DA9E0 /* Main.storyboard */; };
@@ -17,6 +16,7 @@
 		55236B8221B800B2009DA9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55236B8021B800B2009DA9E0 /* LaunchScreen.storyboard */; };
 		55236B8D21B800B2009DA9E0 /* NinjARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B8C21B800B2009DA9E0 /* NinjARTests.swift */; };
 		55236B9821B800B2009DA9E0 /* NinjARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236B9721B800B2009DA9E0 /* NinjARUITests.swift */; };
+		555C3FD021CB50C2004BBFA0 /* SKView+DebugPerfConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555C3FCF21CB50C2004BBFA0 /* SKView+DebugPerfConfigurable.swift */; };
 		5560E31021BAB7E3006C039B /* PRIVACY_POLICY.md in Resources */ = {isa = PBXBuildFile; fileRef = 5560E30F21BAB7E3006C039B /* PRIVACY_POLICY.md */; };
 		559CB6A521BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */; };
 		559CB6A821BAA9650081B3F4 /* VectorCalculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB6A721BAA9650081B3F4 /* VectorCalculatable.swift */; };
@@ -43,7 +43,6 @@
 		55236B6E21B800B0009DA9E0 /* NinjAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NinjAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55236B7121B800B0009DA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55236B7321B800B0009DA9E0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		55236B7521B800B1009DA9E0 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		55236B7721B800B1009DA9E0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		55236B7921B800B1009DA9E0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		55236B7C21B800B1009DA9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		55236B9321B800B2009DA9E0 /* NinjARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55236B9721B800B2009DA9E0 /* NinjARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinjARUITests.swift; sourceTree = "<group>"; };
 		55236B9921B800B2009DA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		555C3FCF21CB50C2004BBFA0 /* SKView+DebugPerfConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKView+DebugPerfConfigurable.swift"; sourceTree = "<group>"; };
 		5560E30F21BAB7E3006C039B /* PRIVACY_POLICY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY_POLICY.md; sourceTree = "<group>"; };
 		559CB6A021BA0CDC0081B3F4 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+VectorCalculatable.swift"; sourceTree = "<group>"; };
@@ -120,7 +120,6 @@
 				559CB69C21B9FD720081B3F4 /* Storyboards */,
 				559CB69D21B9FD840081B3F4 /* Delegates */,
 				559CB69F21BA0CC50081B3F4 /* Sounds */,
-				55236B7521B800B1009DA9E0 /* Actions.sks */,
 				55236B7321B800B0009DA9E0 /* GameScene.sks */,
 				55236B7721B800B1009DA9E0 /* GameScene.swift */,
 				55236B7921B800B1009DA9E0 /* GameViewController.swift */,
@@ -184,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				559CB6A421BAA5600081B3F4 /* CGPoint+VectorCalculatable.swift */,
+				555C3FCF21CB50C2004BBFA0 /* SKView+DebugPerfConfigurable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -323,7 +323,6 @@
 				55236B7421B800B0009DA9E0 /* GameScene.sks in Resources */,
 				55236B7F21B800B2009DA9E0 /* Assets.xcassets in Resources */,
 				55236B8221B800B2009DA9E0 /* LaunchScreen.storyboard in Resources */,
-				55236B7621B800B1009DA9E0 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +351,7 @@
 				559CB6A821BAA9650081B3F4 /* VectorCalculatable.swift in Sources */,
 				55236B7821B800B1009DA9E0 /* GameScene.swift in Sources */,
 				55236B7A21B800B1009DA9E0 /* GameViewController.swift in Sources */,
+				555C3FD021CB50C2004BBFA0 /* SKView+DebugPerfConfigurable.swift in Sources */,
 				55236B7221B800B0009DA9E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +526,7 @@
 		55236B9D21B800B2009DA9E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -546,6 +547,7 @@
 		55236B9E21B800B2009DA9E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
