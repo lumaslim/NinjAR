@@ -9,15 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-struct PhysicsCategory {
-    // Interesting bit flags
-    // Doesn't Swift have nicer bitmask functionality?
-    static let none : UInt32 = 0            // 0000 0000 0000 0000
-    static let all : UInt32 = UInt32.max    // 1111 1111 1111 1111
-    static let monster: UInt32 = 0b1        // Says 1 but b1 notation ??// 0000 0000 0000 0001
-    static let projectile: UInt32 = 0b10     // 0000 0000 0000 0010
-        // 0x1, 0x2??
-}
 class GameScene: SKScene {
     
     private var label : SKLabelNode?
@@ -182,8 +173,10 @@ extension GameScene {
 //    }
 }
 
+//
+
 // - MARK: Mob Physics and collision detection
-extension GameScene: SKPhysicsContactDelegate {
+extension GameScene {
     func setupPhysics(onMonster monster: SKSpriteNode) -> SKPhysicsBody? {
         monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size)
         
@@ -222,6 +215,11 @@ extension GameScene: SKPhysicsContactDelegate {
         projectile.removeFromParent()
         monster.removeFromParent()
     }
+}
+
+// - MARK: Collision detection contact
+extension GameScene: SKPhysicsContactDelegate {
+    
     func didBegin(_ contact: SKPhysicsContact) {
         print("Pew pew contact", contact)
         
